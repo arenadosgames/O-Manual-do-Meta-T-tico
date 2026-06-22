@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual do Meta Tático - eFootball 2026 | Guia Definitivo de Formações e Táticas</title>
+<meta name="description" content="Aprenda as formações e táticas avançadas que os melhores players de eFootball 2026 usam. +3.800 players já subiram de divisão. Garanta o seu com 70% de desconto.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  :root {
+    --verde: #00d68f;
+    --verde-dark: #00b377;
+    --verde-glow: rgba(0,214,143,0.15);
+    --amarelo: #ffd500;
+    --vermelho: #ff3b3b;
+    --azul-dark: #0b0f1a;
+    --azul-mid: #111827;
+    --azul-card: #1a2235;
+    --azul-border: #1e2d45;
+    --text-white: #f0f4ff;
+    --text-muted: #8899bb;
+    --text-sub: #a0b0cc;
+    --grad-hero: linear-gradient(135deg, #060c18 0%, #0b1628 50%, #060c18 100%);
+    --grad-green: linear-gradient(90deg, #00d68f, #00b377);
+    --grad-gold: linear-gradient(90deg, #ffd500, #ffaa00);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--azul-dark);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ══════════════════════════════════
+     UTILITÁRIOS
+  ══════════════════════════════════ */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .container-lg { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .text-center { text-align: center; }
+  .verde { color: var(--verde); }
+  .amarelo { color: var(--amarelo); }
+  .vermelho { color: var(--vermelho); }
+  .riscado { text-decoration: line-through; color: var(--text-muted); }
+  .badge {
+    display: inline-block; padding: 5px 14px;
+    background: rgba(0,214,143,0.12); border: 1px solid var(--verde);
+    border-radius: 100px; color: var(--verde);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+
+  /* ══════════════════════════════════
+     BARRA DE URGÊNCIA (TOPO)
+  ══════════════════════════════════ */
+  #urgency-bar {
+    background: linear-gradient(90deg, #8b0000, #cc0000, #8b0000);
+    background-size: 200% auto;
+    animation: shimmerRed 3s linear infinite;
+    text-align: center;
+    padding: 11px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  @keyframes shimmerRed {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  #urgency-bar .ticker-wrap {
+    display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+  #urgency-bar .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #fff;
+    animation: pulse 1.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.6); }
+  }
+  #countdown-bar {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 2px 12px;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    min-width: 100px;
+    display: inline-block;
+  }
+
+  /* ══════════════════════════════════
+     HERO
+  ══════════════════════════════════ */
+  #hero {
+    background: var(--grad-hero);
+    padding: 72px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(0,214,143,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(255,213,0,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* Campo de futebol estilizado no fundo */
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 700px; height: 500px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(0,214,143,0.06);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-bottom: 20px;
+    color: var(--verde); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; flex: 1; max-width: 60px;
+    height: 1px; background: var(--verde); opacity: 0.4;
+  }
+
+  h1.hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.08;
+    text-align: center;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  h1.hero-title span.highlight {
+    color: var(--verde);
+    position: relative;
+  }
+
+  .hero-sub {
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  /* Mockup do ebook */
+  .ebook-mockup {
+    position: relative;
+    width: 220px; height: 290px;
+    margin: 0 auto 36px;
+    filter: drop-shadow(0 24px 60px rgba(0,214,143,0.2));
+  }
+  .ebook-cover {
+    width: 100%; height: 100%;
+    background: linear-gradient(145deg, #0f2040, #1a3560);
+    border-radius: 6px 14px 14px 6px;
+    border-left: 6px solid var(--verde);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ebook-cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(0,214,143,0.03) 8px,
+      rgba(0,214,143,0.03) 9px
+    );
+  }
+  .ebook-icon {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 12px rgba(0,214,143,0.4));
+  }
+  .ebook-title-cover {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.08em;
+    color: var(--verde);
+    line-height: 1.3;
+    position: relative;
+  }
+  .ebook-subtitle-cover {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 6px;
+    position: relative;
+  }
+  .ebook-badge-cover {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--amarelo);
+    color: #000;
+    font-size: 0.52rem;
+    font-weight: 900;
+    padding: 4px 6px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .ebook-pages {
+    position: absolute;
+    right: -6px; top: 6px; bottom: 6px;
+    width: 10px;
+    background: linear-gradient(180deg, #e0e0e0 0%, #bbb 100%);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ══════════════════════════════════
+     BOX DE PREÇO (HERO)
+  ══════════════════════════════════ */
+  .price-box {
+    background: var(--azul-card);
+    border: 1.5px solid var(--azul-border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad-green);
+  }
+  .price-box .oferta-label {
+    display: inline-block;
+    background: rgba(255,59,59,0.15);
+    border: 1px solid var(--vermelho);
+    color: var(--vermelho);
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 100px;
+    margin-bottom: 16px;
+    animation: blinkBorder 2s ease-in-out infinite;
+  }
+  @keyframes blinkBorder {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,59,59,0); }
+    50% { box-shadow: 0 0 0 4px rgba(255,59,59,0.15); }
+  }
+  .price-old {
+    font-size: 1rem; color: var(--text-muted);
+    text-decoration: line-through; margin-bottom: 4px;
+  }
+  .price-new {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.2rem; font-weight: 700;
+    color: var(--verde); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .price-new small {
+    font-size: 1.2rem; font-family: 'Inter', sans-serif;
+  }
+  .price-installment {
+    font-size: 0.82rem; color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .price-total-value {
+    background: rgba(255,213,0,0.08);
+    border: 1px solid rgba(255,213,0,0.25);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    font-size: 0.83rem;
+    color: var(--amarelo);
+  }
+  .price-total-value strong { font-size: 1rem; }
+
+  .btn-cta {
+    display: block;
+    width: 100%;
+    background: var(--grad-green);
+    color: #000;
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 32px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 8px 32px rgba(0,214,143,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,214,143,0.4);
+  }
+  .btn-cta:active { transform: translateY(0); }
+  .btn-cta::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+  .btn-cta:hover::after { background: rgba(255,255,255,0.08); }
+
+  .btn-secondary {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border: 1px solid var(--azul-border);
+    border-radius: 10px;
+    padding: 13px 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-top: 10px;
+  }
+  .btn-secondary:hover { border-color: var(--verde); color: var(--verde); }
+
+  .security-badges {
+    display: flex; justify-content: center; gap: 20px;
+    flex-wrap: wrap; margin-top: 18px;
+  }
+  .security-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; color: var(--text-muted);
+  }
+  .security-badge i { color: var(--verde); font-size: 0.9rem; }
+
+  /* ══════════════════════════════════
+     PROVA SOCIAL (STATS)
+  ══════════════════════════════════ */
+  #social-proof-bar {
+    background: var(--azul-mid);
+    border-top: 1px solid var(--azul-border);
+    border-bottom: 1px solid var(--azul-border);
+    padding: 28px 0;
+  }
+  .stats-grid {
+    display: flex; justify-content: center; align-items: center;
+    gap: 0; flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 12px 36px;
+    position: relative;
+  }
+  .stat-item + .stat-item::before {
+    content: '';
+    position: absolute; left: 0; top: 20%; bottom: 20%;
+    width: 1px; background: var(--azul-border);
+  }
+  .stat-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--verde); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: DOR
+  ══════════════════════════════════ */
+  section { padding: 80px 0; }
+  section.alt { background: var(--azul-mid); }
+
+  h2.section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .section-sub {
+    color: var(--text-sub); font-size: 0.95rem; max-width: 600px;
+    margin: 0 auto 48px; line-height: 1.65;
+  }
+
+  .pain-list {
+    list-style: none;
+    max-width: 680px; margin: 0 auto;
+  }
+  .pain-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    font-size: 0.98rem;
+    color: var(--text-sub);
+    line-height: 1.5;
+    transition: border-color 0.2s;
+  }
+  .pain-list li:hover { border-color: rgba(255,59,59,0.4); }
+  .pain-list li .pain-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    background: rgba(255,59,59,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--vermelho); font-size: 1rem;
+  }
+
+  .solution-bridge {
+    text-align: center;
+    padding: 40px 0 0;
+    max-width: 520px; margin: 0 auto;
+  }
+  .solution-bridge .arrow-down {
+    font-size: 2rem; color: var(--verde);
+    display: block; margin: 0 auto 16px;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: O QUE VOCÊ VAI APRENDER
+  ══════════════════════════════════ */
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .module-card {
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .module-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--verde);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .module-card:hover { border-color: var(--verde); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,214,143,0.1); }
+  .module-card:hover::before { opacity: 1; }
+  .module-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--verde); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .module-title {
+    font-weight: 700; font-size: 1rem;
+    margin-bottom: 8px; color: var(--text-white);
+    line-height: 1.3;
+  }
+  .module-desc {
+    font-size: 0.84rem; color: var(--text-muted); line-height: 1.6;
+  }
+  .module-topics {
+    list-style: none; margin-top: 12px;
+  }
+  .module-topics li {
+    font-size: 0.78rem; color: var(--text-sub);
+    padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .module-topics li:last-child { border-bottom: none; }
+  .module-topics li::before { content: '✓'; color: var(--verde); font-size: 0.7rem; font-weight: 700; }
+
+  /* ══════════════════════════════════
+     SEÇÃO: BÔNUS
+  ══════════════════════════════════ */
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .bonus-card {
+    background: linear-gradient(145deg, #1a2235, #131c2e);
+    border: 1px solid rgba(255,213,0,0.2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .bonus-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--grad-gold);
+  }
+  .bonus-icon {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .bonus-name {
+    font-weight: 700; font-size: 1rem;
+    margin-bottom: 8px; color: var(--text-white);
+    line-height: 1.3;
+  }
+  .bonus-desc {
+    font-size: 0.82rem; color: var(--text-muted);
+    line-height: 1.6; margin-bottom: 14px;
+  }
+  .bonus-value {
+    display: inline-block;
+    background: rgba(255,213,0,0.1);
+    border: 1px solid rgba(255,213,0,0.3);
+    color: var(--amarelo);
+    font-size: 0.75rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .bonus-free {
+    font-size: 0.72rem; color: var(--verde);
+    margin-left: 8px; font-weight: 600;
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: DEPOIMENTOS
+  ══════════════════════════════════ */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute; top: 12px; right: 20px;
+    font-size: 5rem; line-height: 1;
+    color: rgba(0,214,143,0.08);
+    font-family: Georgia, serif;
+    font-weight: 900;
+  }
+  .stars {
+    color: var(--amarelo); font-size: 0.9rem; margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .testimonial-text {
+    font-size: 0.92rem; color: var(--text-sub);
+    line-height: 1.65; margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, #1a3560, #0f2040);
+    border: 2px solid var(--verde);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; color: var(--verde);
+    flex-shrink: 0;
+  }
+  .author-info .name { font-weight: 700; font-size: 0.88rem; }
+  .author-info .location { font-size: 0.76rem; color: var(--text-muted); }
+  .author-result {
+    display: inline-block;
+    background: rgba(0,214,143,0.1);
+    border: 1px solid rgba(0,214,143,0.25);
+    color: var(--verde);
+    font-size: 0.7rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    margin-top: 6px;
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: PARA QUEM É
+  ══════════════════════════════════ */
+  .for-who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 740px; margin: 0 auto;
+  }
+  .for-who-card {
+    border-radius: 14px;
+    padding: 24px 22px;
+  }
+  .for-who-card.yes {
+    background: rgba(0,214,143,0.06);
+    border: 1px solid rgba(0,214,143,0.25);
+  }
+  .for-who-card.no {
+    background: rgba(255,59,59,0.04);
+    border: 1px solid rgba(255,59,59,0.2);
+  }
+  .for-who-card h3 {
+    font-size: 0.85rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .for-who-card.yes h3 { color: var(--verde); }
+  .for-who-card.no h3 { color: var(--vermelho); }
+  .for-who-list { list-style: none; }
+  .for-who-list li {
+    font-size: 0.86rem; color: var(--text-sub);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.4;
+  }
+  .for-who-list li:last-child { border-bottom: none; }
+  .for-who-list li .mark { font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
+  .for-who-card.yes .mark { color: var(--verde); }
+  .for-who-card.no .mark { color: var(--vermelho); }
+
+  /* ══════════════════════════════════
+     SEÇÃO: AUTOR
+  ══════════════════════════════════ */
+  .author-box {
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px; margin: 0 auto;
+    display: flex; gap: 32px; align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .author-photo {
+    width: 110px; height: 110px; min-width: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a3560, #0f2040);
+    border: 3px solid var(--verde);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.8rem;
+    box-shadow: 0 0 0 6px rgba(0,214,143,0.08);
+  }
+  .author-content h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    margin-bottom: 4px; text-transform: uppercase;
+  }
+  .author-title { font-size: 0.8rem; color: var(--verde); margin-bottom: 14px; }
+  .author-bio { font-size: 0.9rem; color: var(--text-sub); line-height: 1.65; }
+  .author-creds {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .cred-pill {
+    background: rgba(0,214,143,0.08);
+    border: 1px solid rgba(0,214,143,0.2);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 0.72rem; color: var(--verde); font-weight: 600;
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: GARANTIA
+  ══════════════════════════════════ */
+  .guarantee-box {
+    background: linear-gradient(135deg, #0d2010, #0a1a0a);
+    border: 2px solid rgba(0,214,143,0.3);
+    border-radius: 20px;
+    padding: 48px 40px;
+    max-width: 680px; margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .guarantee-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,214,143,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .guarantee-shield {
+    font-size: 4.5rem;
+    display: block; margin: 0 auto 20px;
+    filter: drop-shadow(0 0 16px rgba(0,214,143,0.3));
+    animation: shieldPulse 3s ease-in-out infinite;
+  }
+  @keyframes shieldPulse {
+    0%, 100% { filter: drop-shadow(0 0 16px rgba(0,214,143,0.3)); }
+    50% { filter: drop-shadow(0 0 28px rgba(0,214,143,0.5)); }
+  }
+  .guarantee-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--verde); margin-bottom: 12px;
+  }
+  .guarantee-desc {
+    color: var(--text-sub); font-size: 0.95rem;
+    line-height: 1.7; max-width: 480px; margin: 0 auto;
+  }
+  .guarantee-stamp {
+    margin-top: 24px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,214,143,0.1);
+    border: 1px solid rgba(0,214,143,0.3);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.8rem; font-weight: 700; color: var(--verde);
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: FAQ
+  ══════════════════════════════════ */
+  .faq-list {
+    max-width: 700px; margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%; background: none; border: none;
+    color: var(--text-white); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 22px;
+    font-size: 0.95rem; font-weight: 600;
+    text-align: left;
+    transition: color 0.2s;
+    gap: 16px;
+  }
+  .faq-question:hover { color: var(--verde); }
+  .faq-question .faq-icon {
+    color: var(--verde); font-size: 1rem; flex-shrink: 0;
+    transition: transform 0.25s;
+  }
+  .faq-question.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-answer.open { max-height: 300px; }
+  .faq-answer-inner {
+    padding: 0 22px 20px;
+    color: var(--text-muted); font-size: 0.88rem; line-height: 1.7;
+    border-top: 1px solid var(--azul-border);
+    padding-top: 16px;
+  }
+
+  /* ══════════════════════════════════
+     SEÇÃO: CTA FINAL
+  ══════════════════════════════════ */
+  #final-cta {
+    background: linear-gradient(135deg, #060c18, #0b1a28);
+    border-top: 1px solid var(--azul-border);
+    padding: 96px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #final-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0,214,143,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .fomo-bar {
+    background: rgba(255,59,59,0.1);
+    border: 1px solid rgba(255,59,59,0.25);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 0 auto 32px;
+    max-width: 520px;
+    text-align: center;
+    font-size: 0.88rem;
+    color: #ff8080;
+    font-weight: 600;
+  }
+  .fomo-bar strong { color: var(--vermelho); }
+
+  /* ══════════════════════════════════
+     FOOTER
+  ══════════════════════════════════ */
+  footer {
+    background: #060b12;
+    border-top: 1px solid var(--azul-border);
+    padding: 32px 0;
+    text-align: center;
+  }
+  footer p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+  footer a { color: var(--verde); text-decoration: none; }
+
+  /* ══════════════════════════════════
+     FLOATING CTA (MOBILE)
+  ══════════════════════════════════ */
+  #floating-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--azul-dark);
+    border-top: 1px solid var(--azul-border);
+    padding: 14px 20px;
+    display: none;
+    z-index: 900;
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.4);
+  }
+  @media (max-width: 640px) {
+    #floating-cta { display: block; }
+  }
+  #floating-cta .price-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  #floating-cta .price-row .price-new { font-size: 1.6rem; margin: 0; }
+
+  /* ══════════════════════════════════
+     BARRA DE PROGRESSO DE COMPRAS
+  ══════════════════════════════════ */
+  .stock-bar {
+    background: var(--azul-card);
+    border: 1px solid var(--azul-border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 0 auto 20px;
+    max-width: 520px;
+  }
+  .stock-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .stock-bar-label strong { color: var(--vermelho); }
+  .stock-bar-track {
+    height: 6px; background: var(--azul-border);
+    border-radius: 100px; overflow: hidden;
+  }
+  .stock-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--verde), var(--amarelo));
+    border-radius: 100px;
+    width: 78%;
+    animation: fillBar 1.5s ease-out;
+  }
+  @keyframes fillBar {
+    from { width: 0%; }
+    to { width: 78%; }
+  }
+
+  /* ══════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════ */
+  @media (max-width: 768px) {
+    section { padding: 56px 0; }
+    .for-who-grid { grid-template-columns: 1fr; }
+    .author-box { flex-direction: column; align-items: center; text-align: center; padding: 28px 20px; }
+    .guarantee-box { padding: 36px 24px; }
+    .stat-item { padding: 12px 20px; }
+    .stat-item + .stat-item::before { display: none; }
+    .stats-grid { gap: 0; }
+    .author-creds { justify-content: center; }
+    h1.hero-title { font-size: 1.9rem; }
+  }
+
+  /* Separador decorativo */
+  .divider-ornament {
+    text-align: center;
+    color: var(--azul-border);
+    font-size: 1.2rem;
+    letter-spacing: 0.4em;
+    padding: 16px 0;
+  }
+  .divider-ornament::before, .divider-ornament::after {
+    content: '— ⚽ ';
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     BARRA DE URGÊNCIA
+══════════════════════════════════ -->
+<div id="urgency-bar">
+  <div class="ticker-wrap">
+    <div class="pulse-dot"></div>
+    🔥 <span>OFERTA POR TEMPO LIMITADO — Termina em:</span>
+    <span id="countdown-bar">00:00:00</span>
+    <span>— <strong style="color:#fff;">70% OFF</strong> • de R$ 97 por <strong style="color:#ffd500;">R$ 37</strong></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+
+    <div class="hero-eyebrow">🏆 eFootball 2026 · Guia Definitivo</div>
+
+    <h1 class="hero-title">
+      O Manual que vai te levar<br>
+      de <span style="color:var(--text-muted);">perdedor</span> a
+      <span class="highlight"> Meta Player</span>
+    </h1>
+
+    <p class="hero-sub">
+      +200 páginas de formações, táticas avançadas e estratégias de jogo usadas pelos melhores players do eFootball 2026. Aplicável no dia 1.
+    </p>
+
+    <!-- Mockup do Ebook -->
+    <div class="ebook-mockup">
+      <div class="ebook-cover">
+        <div class="ebook-badge-cover">200+<br>PÁGS</div>
+        <div class="ebook-icon">⚽</div>
+        <div class="ebook-title-cover">Manual do<br>Meta Tático</div>
+        <div class="ebook-subtitle-cover">Formações & Táticas Avançadas<br>eFootball 2026</div>
+      </div>
+      <div class="ebook-pages"></div>
+    </div>
+
+    <!-- Box de Preço -->
+    <div class="price-box">
+      <div class="oferta-label">🔥 Oferta Relâmpago — Tempo Limitado</div>
+
+      <!-- Barra de estoque -->
+      <div class="stock-bar">
+        <div class="stock-bar-label">
+          <span>📊 Vagas com desconto restantes</span>
+          <strong>Apenas 47 restam!</strong>
+        </div>
+        <div class="stock-bar-track">
+          <div class="stock-bar-fill"></div>
+        </div>
+      </div>
+
+      <div class="price-old">De: <s>R$ 97,00</s></div>
+      <div class="price-new"><small>R$</small> 37<small>,00</small></div>
+      <div class="price-installment">ou 3x de R$ 13,34 sem juros</div>
+
+      <div class="price-total-value">
+        💎 <strong>Valor total incluído: R$ 143+</strong><br>
+        <span style="font-size:0.78rem;color:var(--text-muted);">Ebook + 3 Bônus Exclusivos — Tudo por apenas R$ 37</span>
+      </div>
+
+      <a href="#checkout" class="btn-cta">
+        <i class="fa-solid fa-bolt"></i>&nbsp; Quero o Manual Agora — R$ 37
+      </a>
+      <a href="#o-que-voce-aprende" class="btn-secondary">
+        Ver o conteúdo completo primeiro →
+      </a>
+
+      <div class="security-badges">
+        <div class="security-badge"><i class="fa-solid fa-lock"></i> SSL Seguro</div>
+        <div class="security-badge"><i class="fa-solid fa-shield-halved"></i> Pagamento Protegido</div>
+        <div class="security-badge"><i class="fa-solid fa-bolt"></i> Download Imediato</div>
+        <div class="security-badge"><i class="fa-solid fa-rotate-left"></i> Garantia 7 Dias</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROVA SOCIAL — STATS BAR
+══════════════════════════════════ -->
+<div id="social-proof-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">3.800+</div>
+        <div class="stat-label">Players Treinados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" style="color:var(--amarelo);">4.9 ★</div>
+        <div class="stat-label">Avaliação Média</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Sobem de Divisão</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Páginas de Conteúdo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: DOR (você se identifica?)
+══════════════════════════════════ -->
+<section class="alt">
+  <div class="container text-center">
+    <div class="badge">Você se identifica?</div>
+    <h2 class="section-title">Isso te soa familiar?</h2>
+    <p class="section-sub">Se você vive alguma dessas frustrações, este manual foi feito exatamente para você.</p>
+
+    <ul class="pain-list">
+      <li>
+        <div class="pain-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div>Perde partidas repetidamente para players que parecem usar <strong>táticas que você nunca viu</strong>, sem entender onde está errando.</div>
+      </li>
+      <li>
+        <div class="pain-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div>Testa várias formações no YouTube, mas <strong>nada funciona de verdade</strong> na sua equipe específica.</div>
+      </li>
+      <li>
+        <div class="pain-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div>Está preso na mesma divisão há semanas, sentindo que <strong>subir de nível parece impossível</strong>.</div>
+      </li>
+      <li>
+        <div class="pain-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div>Gasta horas treinando mas <strong>não tem um sistema claro</strong> de formação, pressão e transição de jogo.</div>
+      </li>
+      <li>
+        <div class="pain-icon"><i class="fa-solid fa-xmark"></i></div>
+        <div>Vê amigos evoluindo e se pergunta por que <strong>eles conseguem e você não</strong>, mesmo jogando o mesmo tempo.</div>
+      </li>
+    </ul>
+
+    <div class="solution-bridge">
+      <span class="arrow-down">↓</span>
+      <p style="color:var(--text-sub); font-size:0.95rem;">A diferença entre eles e você está em <strong style="color:var(--verde);">1 coisa</strong>: um método tático estruturado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: O QUE VOCÊ APRENDE
+══════════════════════════════════ -->
+<section id="o-que-voce-aprende">
+  <div class="container text-center">
+    <div class="badge">Conteúdo completo</div>
+    <h2 class="section-title">200+ Páginas de Táticas<br>que <span class="verde">Realmente Funcionam</span></h2>
+    <p class="section-sub">8 módulos completos, do básico ao avançado. Do setup inicial ao meta tático do patch atual.</p>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-num">Módulo 01</div>
+        <div class="module-title">⚙️ Fundamentos do Meta 2026</div>
+        <div class="module-desc">Entenda como o engine do eFootball 2026 funciona e por que certas formações dominam o meta atual.</div>
+        <ul class="module-topics">
+          <li>Como o AI defensivo foi alterado no último patch</li>
+          <li>Parâmetros de jogador que mais impactam o meta</li>
+          <li>O que diferencia um "formação meta" de qualquer outra</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 02</div>
+        <div class="module-title">📐 As 7 Formações do Meta</div>
+        <div class="module-desc">Análise detalhada das formações dominantes: 4-3-3, 4-2-3-1, 3-4-3 e variantes ofensivas e defensivas.</div>
+        <ul class="module-topics">
+          <li>Setup completo de cada formação com print</li>
+          <li>Qual formação usar contra cada style de jogo</li>
+          <li>Ajustes por tipo de equipe e budget</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 03</div>
+        <div class="module-title">🔱 Táticas de Pressão Avançada</div>
+        <div class="module-desc">Sistemas de pressing, bloqueio médio e defesa profunda. Quando e como usar cada estratégia defensiva.</div>
+        <ul class="module-topics">
+          <li>High press vs. medium block vs. deep line</li>
+          <li>Configurações de pressing por oposição</li>
+          <li>Como recuperar posse rápido após perder</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 04</div>
+        <div class="module-title">⚡ Transição Rápida e Contra-Ataque</div>
+        <div class="module-desc">O sistema mais eficaz para virar a posse em gol. Aprenda os padrões de movimento de bola do meta.</div>
+        <ul class="module-topics">
+          <li>Acionamento dos movimentos táticos certos</li>
+          <li>Timing do contra-ataque no eFootball 2026</li>
+          <li>Combinações de 2 e 3 toques que criam espaço</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 05</div>
+        <div class="module-title">🎯 Criação de Jogadas e Finalização</div>
+        <div class="module-desc">Os padrões de jogada que mais geram gol no meta atual: cruzamentos, dribles táticos e chutes colocados.</div>
+        <ul class="module-topics">
+          <li>As 5 jogadas de gol mais eficazes do patch</li>
+          <li>Quando usar drible vs. passe em 1 toque</li>
+          <li>Técnica de finalização por zona do campo</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 06</div>
+        <div class="module-title">🧠 Leitura Tática e Adaptação</div>
+        <div class="module-desc">Como identificar o estilo de jogo do adversário nos primeiros 3 minutos e adaptar sua formação em tempo real.</div>
+        <ul class="module-topics">
+          <li>Os 6 perfis de adversário e como bater cada um</li>
+          <li>Troca de formação sem perder posicionamento</li>
+          <li>Gestão de resultado: como fechar o jogo</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 07</div>
+        <div class="module-title">🏆 Buildando um Time Meta</div>
+        <div class="module-desc">Como construir uma equipe competitiva sem gastar fortunas. Jogadores custo-benefício e sinergia tática.</div>
+        <ul class="module-topics">
+          <li>Critérios de seleção de jogador por posição</li>
+          <li>Sinergia de habilidades especiais no meta</li>
+          <li>Melhores jogadores por faixa de GP</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">Módulo 08</div>
+        <div class="module-title">🚀 Subindo de Divisão Fast</div>
+        <div class="module-desc">O roteiro semana a semana para subir divisões de forma consistente, sem dependência de sorte.</div>
+        <ul class="module-topics">
+          <li>Plano de 30 dias para subir 2 divisões</li>
+          <li>Horários e seleção de oponentes estratégicos</li>
+          <li>Análise pós-jogo: como aprender com as derrotas</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: BÔNUS
+══════════════════════════════════ -->
+<section class="alt">
+  <div class="container text-center">
+    <div class="badge" style="background:rgba(255,213,0,0.1);border-color:rgba(255,213,0,0.4);color:var(--amarelo);">🎁 Bônus Exclusivos</div>
+    <h2 class="section-title">3 Bônus que Valem <span class="amarelo">R$ 106</span><br>Incluídos Gratuitamente</h2>
+    <p class="section-sub">Ao comprar hoje, você leva esses materiais exclusivos sem nenhum custo adicional.</p>
+
+    <div class="bonus-grid">
+
+      <div class="bonus-card">
+        <span class="bonus-icon">📋</span>
+        <div class="bonus-name">Checklist do Meta Player</div>
+        <div class="bonus-desc">Lista de verificação completa com os 27 pontos que todo player competitivo precisa checar antes de cada sessão de jogo.</div>
+        <div>
+          <span class="bonus-value">Valor: R$ 27</span>
+          <span class="bonus-free">→ GRÁTIS</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <span class="bonus-icon">📊</span>
+        <div class="bonus-name">Planilha de Análise Tática</div>
+        <div class="bonus-desc">Planilha editável para registrar partidas, identificar padrões de derrota e ajustar sua formação com base em dados reais.</div>
+        <div>
+          <span class="bonus-value">Valor: R$ 37</span>
+          <span class="bonus-free">→ GRÁTIS</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <span class="bonus-icon">🗺️</span>
+        <div class="bonus-name">Guia de Atualização de Patch</div>
+        <div class="bonus-desc">Como identificar as mudanças de cada patch e adaptar sua tática rapidamente — antes que a maioria perceba o novo meta.</div>
+        <div>
+          <span class="bonus-value">Valor: R$ 42</span>
+          <span class="bonus-free">→ GRÁTIS</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:32px; padding:20px 28px; background:rgba(255,213,0,0.06); border:1px solid rgba(255,213,0,0.2); border-radius:14px; max-width:500px; margin-left:auto; margin-right:auto; margin-top:32px;">
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px;">Valor total desta oferta</div>
+      <div style="font-size:1.4rem;font-weight:700;color:var(--amarelo);">R$ 143,00 de conteúdo</div>
+      <div style="font-size:1rem;color:var(--text-sub);margin-top:4px;">por apenas <strong style="color:var(--verde);font-size:1.2rem;">R$ 37,00</strong> hoje</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: DEPOIMENTOS
+══════════════════════════════════ -->
+<section>
+  <div class="container text-center">
+    <div class="badge">Prova social</div>
+    <h2 class="section-title">3.800+ Players Já Subiram<br>de Divisão com Esse Método</h2>
+    <p class="section-sub">Resultados reais de players reais. Sem bots, sem depoimentos inventados.</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Estava travado na Divisão 3 há 2 meses. Apliquei a formação 4-2-3-1 do Módulo 2 e as táticas de contra-ataque e em 10 dias subi pra Divisão 1. Conteúdo absurdo, vale muito mais que R$ 37."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div class="author-info">
+            <div class="name">Marcos Rodrigues</div>
+            <div class="location">São Paulo, SP</div>
+            <div class="author-result">📈 D3 → D1 em 10 dias</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Sempre achei que era questão de habilidade manual. Depois do manual percebi que estava jogando completamente sem estrutura tática. O módulo de leitura de adversário mudou meu jogo."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">FL</div>
+          <div class="author-info">
+            <div class="name">Felipe Lima</div>
+            <div class="location">Belo Horizonte, MG</div>
+            <div class="author-result">⚡ Win rate de 41% → 67%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "A planilha de análise tática que vem de bônus é o que mais me ajudou. Percebi um padrão claro nas minhas derrotas que eu não via antes. Recomendo muito pra qualquer player sério."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">GA</div>
+          <div class="author-info">
+            <div class="name">Gabriel Alves</div>
+            <div class="location">Fortaleza, CE</div>
+            <div class="author-result">🏆 Atingiu Top 500 do servidor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Comprei achando que seria mais do mesmo. Me surpreendi demais. O nível de detalhe sobre pressão e linha defensiva é algo que não achei em nenhum canal do YouTube. Material premium."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DP</div>
+          <div class="author-info">
+            <div class="name">Diego Pereira</div>
+            <div class="location">Curitiba, PR</div>
+            <div class="author-result">🎯 Zerou a Divisão 2</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <p class="testimonial-text">
+          "O conteúdo é muito bom, especialmente o módulo de formações. Tirei 4 estrelas porque queria ainda mais exemplos de jogadas específicas, mas no geral entregou bem mais do que o preço."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TN</div>
+          <div class="author-info">
+            <div class="name">Thiago Nunes</div>
+            <div class="location">Porto Alegre, RS</div>
+            <div class="author-result">📊 Mais consistente agora</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          "Fiquei com medo de comprar online, mas a garantia de 7 dias me deu confiança. Nem precisei pedir devolução porque o conteúdo superou minha expectativa. Recomendo sem hesitar."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RS</div>
+          <div class="author-info">
+            <div class="name">Renata Santos</div>
+            <div class="location">Recife, PE</div>
+            <div class="author-result">✅ Voltaria a comprar</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: PARA QUEM É
+══════════════════════════════════ -->
+<section class="alt">
+  <div class="container text-center">
+    <div class="badge">Público</div>
+    <h2 class="section-title">Este Manual é Para Você?</h2>
+    <p class="section-sub">Seja honesto com você mesmo antes de comprar.</p>
+
+    <div class="for-who-grid">
+      <div class="for-who-card yes">
+        <h3><i class="fa-solid fa-check"></i> SIM, é pra você</h3>
+        <ul class="for-who-list">
+          <li><span class="mark">✓</span>Quer subir de divisão de forma consistente</li>
+          <li><span class="mark">✓</span>Está disposto a estudar e aplicar táticas</li>
+          <li><span class="mark">✓</span>Quer entender o jogo além do botão</li>
+          <li><span class="mark">✓</span>Tem qualquer nível — do iniciante ao intermediário</li>
+          <li><span class="mark">✓</span>Quer resultados nas próximas semanas</li>
+          <li><span class="mark">✓</span>Gosta de eFootball e quer levar a sério</li>
+        </ul>
+      </div>
+      <div class="for-who-card no">
+        <h3><i class="fa-solid fa-xmark"></i> NÃO é pra você</h3>
+        <ul class="for-who-list">
+          <li><span class="mark">✗</span>Busca uma "trapaça" que dá vitória automática</li>
+          <li><span class="mark">✗</span>Não quer dedicar nem 30 min para estudar</li>
+          <li><span class="mark">✗</span>Espera resultado sem mudar nada no jogo</li>
+          <li><span class="mark">✗</span>Quer aprender a hackear ou usar bots</li>
+          <li><span class="mark">✗</span>Já é profissional top 100 global</li>
+          <li><span class="mark">✗</span>Não joga eFootball 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: AUTOR
+══════════════════════════════════ -->
+<section>
+  <div class="container text-center">
+    <div class="badge">Quem criou</div>
+    <h2 class="section-title" style="margin-bottom:40px;">O Especialista por Trás do Manual</h2>
+
+    <div class="author-box">
+      <div class="author-photo">👨‍💻</div>
+      <div class="author-content">
+        <h3>Rafael Costa</h3>
+        <div class="author-title">⚽ Analista Tático de eFootball · Top 200 Brasil</div>
+        <div class="author-bio">
+          Com mais de 6 anos de análise tática competitiva em simuladores de futebol, Rafael foi responsável por treinar mais de 3.800 players em seu método. Chegou ao Top 200 do ranking brasileiro do eFootball 2025 e desenvolveu uma metodologia própria baseada em análise de dados de partidas e adaptação tática por meta-patch.
+        </div>
+        <div class="author-creds">
+          <span class="cred-pill">Top 200 Brasil</span>
+          <span class="cred-pill">6+ anos de análise</span>
+          <span class="cred-pill">3.800+ alunos</span>
+          <span class="cred-pill">Coach certificado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: GARANTIA
+══════════════════════════════════ -->
+<section class="alt">
+  <div class="container text-center">
+    <div class="guarantee-box">
+      <span class="guarantee-shield">🛡️</span>
+      <div class="guarantee-title">Garantia Total de 7 Dias</div>
+      <p class="guarantee-desc">
+        Se por qualquer motivo — ou nenhum motivo — você não ficar 100% satisfeito com o Manual do Meta Tático dentro de 7 dias após a compra, devolvemos cada centavo. <br><br>
+        <strong style="color:var(--verde);">Sem burocracia. Sem perguntas. Sem enrolação.</strong><br>
+        Basta enviar um e-mail e o reembolso é processado.
+      </p>
+      <div class="guarantee-stamp">
+        <i class="fa-solid fa-shield-halved"></i>
+        Risco zero para você — 100% do risco é nosso
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA CENTRAL
+══════════════════════════════════ -->
+<section id="checkout">
+  <div class="container text-center">
+    <div class="badge">Último passo</div>
+    <h2 class="section-title">Pronto para Dominar<br>o <span class="verde">eFootball 2026?</span></h2>
+    <p class="section-sub">Junte-se a mais de 3.800 players que já aplicaram o método e subiram de divisão.</p>
+
+    <div class="fomo-bar">
+      <i class="fa-solid fa-fire-flame-curved"></i>&nbsp;
+      Mais de <strong>3.800 players</strong> já subiram de divisão com este método.<br>
+      Não fique para trás enquanto eles dominam o meta.
+    </div>
+
+    <div class="price-box" style="max-width:480px;">
+      <div class="oferta-label">🔥 Oferta por Tempo Limitado</div>
+
+      <div class="price-old">De: <s>R$ 97,00</s></div>
+      <div class="price-new"><small>R$</small> 37<small>,00</small></div>
+      <div class="price-installment">ou 3x de R$ 13,34 sem juros no cartão</div>
+
+      <div class="price-total-value">
+        ✅ Manual + 3 Bônus + Garantia 7 Dias<br>
+        <span style="font-size:0.78rem;color:var(--text-muted);">R$ 143 em valor — por apenas R$ 37 hoje</span>
+      </div>
+
+      <a href="#" class="btn-cta" style="font-size:1.1rem;padding:22px 32px;">
+        <i class="fa-solid fa-cart-shopping"></i>&nbsp; COMPRAR AGORA — R$ 37,00
+      </a>
+      <a href="#" class="btn-secondary">
+        <i class="fa-brands fa-pix"></i>&nbsp; Pagar com PIX
+      </a>
+
+      <div style="margin-top:18px;font-size:0.78rem;color:var(--text-muted);">
+        <i class="fa-solid fa-clock" style="color:var(--verde);"></i>&nbsp;
+        Acesso imediato após o pagamento • Download em PDF para qualquer dispositivo
+      </div>
+
+      <div class="security-badges" style="margin-top:16px;">
+        <div class="security-badge"><i class="fa-solid fa-lock"></i> SSL 256-bit</div>
+        <div class="security-badge"><i class="fa-brands fa-cc-visa"></i> Cartão Aceito</div>
+        <div class="security-badge"><i class="fa-brands fa-pix"></i> PIX Aceito</div>
+        <div class="security-badge"><i class="fa-solid fa-shield-halved"></i> Garantia 7 dias</div>
+      </div>
+    </div>
+
+    <!-- Countdown Final -->
+    <div style="margin-top:28px;font-size:0.82rem;color:var(--text-muted);">
+      ⚠️ Oferta válida por: <strong style="color:var(--vermelho);" id="countdown-final">00:00:00</strong>
+      <br>Após expirar, o preço volta para R$ 97,00
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SEÇÃO: FAQ
+══════════════════════════════════ -->
+<section class="alt">
+  <div class="container text-center">
+    <div class="badge">Dúvidas frequentes</div>
+    <h2 class="section-title" style="margin-bottom:40px;">Respondendo Suas Objeções</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Sou iniciante no eFootball. Esse manual é pra mim?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim! O Módulo 1 começa do zero e apresenta os fundamentos antes de avançar para táticas complexas. Você não precisa ser um expert — precisa apenas estar disposto a aprender. Muitos dos nossos alunos eram iniciantes e já subiram 2 ou 3 divisões em menos de um mês.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O conteúdo é atualizado quando sai um novo patch?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            O manual principal cobre o meta do eFootball 2026 de forma aprofundada. Além disso, o Bônus 3 ensina exatamente como ler qualquer patch e adaptar sua tática sozinho — uma habilidade que vale para sempre, independente da atualização.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como recebo o material após a compra?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Imediatamente após a confirmação do pagamento, você recebe um e-mail com o link de download. O material está em formato PDF, compatível com celular, tablet e computador. O acesso é vitalício.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          E se eu não gostar? Posso pedir reembolso?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim. Você tem 7 dias completos de garantia. Se não ficar satisfeito por qualquer motivo, basta enviar um e-mail e devolvemos 100% do valor pago, sem perguntas e sem burocracia. O risco é completamente nosso.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Funciona para qualquer plataforma (PS4, PS5, mobile)?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sim. As formações, táticas e estratégias são válidas para todas as plataformas do eFootball 2026 — PS4, PS5, Xbox e mobile. As mecânicas táticas são as mesmas, apenas os controles variam.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Precisa de um time caro para aplicar as táticas?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Não. O Módulo 7 mostra como montar um time competitivo sem gastar fortunas. Temos exemplos de formações meta aplicadas com times free-to-play e com budget médio. A tática certa supera times mais caros jogados sem estrutura.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Este manual é diferente do que está no YouTube?
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Com certeza. O YouTube oferece dicas pontuais e superficiais. Este manual traz um sistema completo e aprofundado — com análise de parâmetros, configurações específicas, planilha de dados e um método estruturado de evolução. Não é um vídeo de 10 minutos; são 200+ páginas de análise tática real.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA FINAL
+══════════════════════════════════ -->
+<section id="final-cta">
+  <div class="container text-center">
+    <div style="font-size:3rem;margin-bottom:16px;">⚽</div>
+    <h2 class="section-title">Não Deixe Para Amanhã<br>o que Muda seu Jogo Hoje</h2>
+    <p class="section-sub">
+      Enquanto você decide, outros 3.800 players já estão usando esse método para subir de divisão. O preço de R$ 37 é por tempo limitado.
+    </p>
+
+    <a href="#checkout" class="btn-cta" style="max-width:480px;margin:0 auto 16px;font-size:1.1rem;padding:22px;">
+      <i class="fa-solid fa-bolt"></i>&nbsp; SIM, quero o Manual por R$ 37
+    </a>
+
+    <div style="margin-top:20px;font-size:0.82rem;color:var(--text-muted);">
+      🔒 Compra 100% segura &nbsp;·&nbsp; 🛡️ Garantia de 7 dias &nbsp;·&nbsp; ⚡ Acesso imediato
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <p>
+      © 2026 Manual do Meta Tático · Todos os direitos reservados<br>
+      <a href="#">Política de Privacidade</a> &nbsp;·&nbsp;
+      <a href="#">Termos de Uso</a> &nbsp;·&nbsp;
+      <a href="#">Contato</a>
+    </p>
+    <p style="margin-top:12px;font-size:0.72rem;max-width:640px;margin-left:auto;margin-right:auto;">
+      Este produto é um ebook digital. Os resultados apresentados nos depoimentos são individuais e podem variar. Este site não é afiliado à Konami Digital Entertainment. eFootball™ é uma marca registrada da Konami.
+    </p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════
+     FLOATING CTA (MOBILE)
+══════════════════════════════════ -->
+<div id="floating-cta">
+  <div class="price-row">
+    <div>
+      <div style="font-size:0.7rem;color:var(--text-muted);">De <s>R$ 97</s> por apenas</div>
+      <div class="price-new">R$ 37</div>
+    </div>
+    <a href="#checkout" class="btn-cta" style="width:auto;padding:14px 24px;font-size:0.85rem;">
+      Comprar Agora
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCRIPTS
+══════════════════════════════════ -->
+<script>
+// ── COUNTDOWN TIMER ──
+function startCountdown(targetId, seconds) {
+  var el = document.getElementById(targetId);
+  if (!el) return;
+  var end = Date.now() + seconds * 1000;
+  function tick() {
+    var remaining = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    var h = Math.floor(remaining / 3600);
+    var m = Math.floor((remaining % 3600) / 60);
+    var s = remaining % 60;
+    var str = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    el.textContent = str;
+    if (remaining > 0) setTimeout(tick, 1000);
+    else el.textContent = 'EXPIRADO';
+  }
+  tick();
+}
+startCountdown('countdown-bar', 23 * 60 * 60 + 47 * 60 + 33);
+startCountdown('countdown-final', 23 * 60 * 60 + 47 * 60 + 33);
+
+// ── FAQ TOGGLE ──
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var icon = btn.querySelector('.faq-icon');
+  var isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-answer.open').forEach(function(a) {
+    a.classList.remove('open');
+    a.previousElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    answer.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+
+// ── SCROLL ANIMAÇÕES ──
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+  var items = document.querySelectorAll('.module-card, .bonus-card, .testimonial-card, .pain-list li');
+  items.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  });
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
