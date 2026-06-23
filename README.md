@@ -1,1 +1,1 @@
-# O-Manual-do-Meta-T-tico
+manual-do-meta-tatico
